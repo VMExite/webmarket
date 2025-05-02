@@ -19,7 +19,7 @@ class User(Base):
     id = Column(Integer, autoincrement=True, primary_key=True)
     login = Column(String, nullable=False)
     email = Column(String, unique=True, nullable=False)
-    role = Column(Integer, ForeignKey('roles.id'))
+    role = Column(Integer, ForeignKey('roles.id'), default=0)
     balance = Column(Integer, default=0)
 
 
@@ -70,4 +70,3 @@ class Comment(Base):
 DATABASE_URL = 'sqlite:///../database.db'
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base.metadata.create_all(bind=engine)
