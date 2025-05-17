@@ -1,11 +1,9 @@
 
 import re
 from wsgiref.validate import validator
-from datetime import date
+from datetime import datetime
 from pydantic import EmailStr, Field
 from pydantic.v1 import BaseModel
-
-
 
 
 # Roles
@@ -27,13 +25,6 @@ class UserBase(BaseModel):
     email: EmailStr
     balance: int = Field(ge=0)
 
-    @validator('login')
-    def login(self, value):
-        if ' ' in value or not re.match(r'^[a-zA-Z]+$', value):
-            raise ValueError('Login contains invalid characters')
-        return value
-
-
 class UserCreate(UserBase):
     role: int
 
@@ -43,6 +34,12 @@ class UserRead(UserBase):
 
     class Config:
         orm_mode = True
+
+@validator('login')
+def login(value):
+    if ' ' in value or not re.fullmatch(r'^[a-zA-Z]+$', value):
+        raise ValueError('Login contains invalid characters')
+    return value
 
 # Types
 class TypeBase(BaseModel):
@@ -84,24 +81,26 @@ class CommentBase(BaseModel):
     likes: int
     date: str
 
-    @validator('date')
-    def date(self, value):
-        if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
-            raise ValueError('Data must have a format: DD.MM.YYYY')
-
-        try:
-            date.strftime(value, '%d.%m.%Y')
-        except ValueError:
-            raise ValueError('Invalid data value')
-
-class CommentCreate(BaseModel):
+class CommentCreate(CommentBase):
     user: int
     product: int
 
-class CommentRead(BaseModel):
+class CommentRead(CommentBase):
     id: int
     user: UserRead
     product: ProductRead
 
     class Config:
         orm_mode = True
+
+@validator('date')
+def date(value):
+    if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
+        raise ValueError('Data must have a format: DD.MM.YYYY')
+
+    try:
+        datetime.strftime(value, '%d.%m.%Y')
+    except ValueError:
+        raise ValueError('Invalid data value')
+
+    return value
