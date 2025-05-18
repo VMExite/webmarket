@@ -4,7 +4,7 @@ import router
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 
-from server.src.Main import get_db
+from server.src.database_helper import get_db
 from server.src.model.Database import User
 from server.src.model.Schemas import UserRead, UserCreate
 

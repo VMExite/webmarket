@@ -1,23 +1,32 @@
+import uvicorn
+
+from contextlib import asynccontextmanager
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
-from server.src.model.Database import SessionLocal, User
+from server.src.model.Database import User
+from server.src import database_helper as db_helper
 from server.src.model.Database import Base, engine
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+from fastapi import FastAPI
+from server.src.routers.comments.views import comment_router
 
-def init_db():
-    Base.metadata.create_all(bind=engine)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    with db_helper.engine.begin() as connection:
+        connection.execute(Base.metadata.create_all(bind=engine))
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
+app.include_router(comment_router, prefix="/comments")
+
 
 
 
 def main():
     # Получаем сессию через генератор
-    db = next(get_db())
+    db = next(db_helper.get_db())
 
     # Получаем первого пользователя
     user = db.query(User).first()
@@ -30,4 +39,5 @@ def main():
 
 
 if __name__ == "__main__":
+    uvicorn.run("Main:app", reload=True)
     main()

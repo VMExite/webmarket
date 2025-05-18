@@ -2,8 +2,8 @@
 import re
 from wsgiref.validate import validator
 from datetime import datetime
-from pydantic import EmailStr, Field
-from pydantic.v1 import BaseModel
+from pydantic import EmailStr, Field, field_validator
+from pydantic import BaseModel
 
 
 # Roles
@@ -17,13 +17,22 @@ class RoleRead(RoleBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Users
 class UserBase(BaseModel):
     login: str
     email: EmailStr
     balance: int = Field(ge=0)
+
+    @field_validator('login')
+    @classmethod
+    def login(cls, value):
+        if ' ' in value or not re.fullmatch(r'^[a-zA-Z]+$', value):
+            raise ValueError('Login contains invalid characters')
+        return value
 
 class UserCreate(UserBase):
     role: int
@@ -33,13 +42,11 @@ class UserRead(UserBase):
     role: RoleRead
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
-@validator('login')
-def login(value):
-    if ' ' in value or not re.fullmatch(r'^[a-zA-Z]+$', value):
-        raise ValueError('Login contains invalid characters')
-    return value
+
+
 
 # Types
 class TypeBase(BaseModel):
@@ -52,7 +59,9 @@ class TypeRead(TypeBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Products
 class ProductBase(BaseModel):
@@ -72,7 +81,9 @@ class ProductRead(ProductBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Comments
 class CommentBase(BaseModel):
@@ -80,6 +91,19 @@ class CommentBase(BaseModel):
     text: str
     likes: int
     date: str
+
+    @field_validator('date')
+    @classmethod
+    def date(cls, value):
+        if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
+            raise ValueError('Data must have a format: DD.MM.YYYY')
+
+        try:
+            datetime.strftime(value, '%d.%m.%Y')
+        except ValueError:
+            raise ValueError('Invalid data value')
+
+        return value
 
 class CommentCreate(CommentBase):
     user: int
@@ -91,16 +115,7 @@ class CommentRead(CommentBase):
     product: ProductRead
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
 
-@validator('date')
-def date(value):
-    if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
-        raise ValueError('Data must have a format: DD.MM.YYYY')
 
-    try:
-        datetime.strftime(value, '%d.%m.%Y')
-    except ValueError:
-        raise ValueError('Invalid data value')
-
-    return value
