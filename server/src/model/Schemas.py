@@ -1,11 +1,9 @@
 
 import re
 from wsgiref.validate import validator
-from datetime import date
-from pydantic import EmailStr, Field
-from pydantic.v1 import BaseModel
-
-
+from datetime import datetime
+from pydantic import EmailStr, Field, field_validator
+from pydantic import BaseModel
 
 
 # Roles
@@ -19,7 +17,9 @@ class RoleRead(RoleBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Users
 class UserBase(BaseModel):
@@ -27,12 +27,12 @@ class UserBase(BaseModel):
     email: EmailStr
     balance: int = Field(ge=0)
 
-    @validator('login')
-    def login(self, value):
-        if ' ' in value or not re.match(r'^[a-zA-Z]+$', value):
+    @field_validator('login')
+    @classmethod
+    def login(cls, value):
+        if ' ' in value or not re.fullmatch(r'^[a-zA-Z]+$', value):
             raise ValueError('Login contains invalid characters')
         return value
-
 
 class UserCreate(UserBase):
     role: int
@@ -42,7 +42,11 @@ class UserRead(UserBase):
     role: RoleRead
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
+
+
 
 # Types
 class TypeBase(BaseModel):
@@ -55,7 +59,9 @@ class TypeRead(TypeBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Products
 class ProductBase(BaseModel):
@@ -75,7 +81,9 @@ class ProductRead(ProductBase):
     id: int
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
 
 # Comments
 class CommentBase(BaseModel):
@@ -84,24 +92,30 @@ class CommentBase(BaseModel):
     likes: int
     date: str
 
-    @validator('date')
-    def date(self, value):
+    @field_validator('date')
+    @classmethod
+    def date(cls, value):
         if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
             raise ValueError('Data must have a format: DD.MM.YYYY')
 
         try:
-            date.strftime(value, '%d.%m.%Y')
+            datetime.strftime(value, '%d.%m.%Y')
         except ValueError:
             raise ValueError('Invalid data value')
 
-class CommentCreate(BaseModel):
+        return value
+
+class CommentCreate(CommentBase):
     user: int
     product: int
 
-class CommentRead(BaseModel):
+class CommentRead(CommentBase):
     id: int
     user: UserRead
     product: ProductRead
 
     class Config:
-        orm_mode = True
+        # orm_mode = True
+        from_attributes = True
+
+

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint, Boolean, create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
+from sqlalchemy.orm import DeclarativeBase, sessionmaker, relationship
 
 
 class Base(DeclarativeBase):
@@ -21,6 +21,9 @@ class User(Base):
     email = Column(String, unique=True, nullable=False)
     role = Column(Integer, ForeignKey('roles.id'), default=0)
     balance = Column(Integer, default=0)
+
+    role_data = relationship("Role", backref="users")
+    comments = relationship("Comment", back_populates="user_data")
 
 
 class Type(Base):
@@ -44,6 +47,8 @@ class Product(Base):
     views = Column(Integer, default=0)
     pic = Column(String)
 
+    comments = relationship("Comment", back_populates="product_data")
+
     __table_args__ = (
         CheckConstraint('price >= 0', name='check_price_positive'),
         CheckConstraint('quantity >= 0', name='check_quantity_positive'),
@@ -63,6 +68,9 @@ class Comment(Base):
     likes = Column(Integer, default=0)
     date = Column(String, nullable=False)
 
+    user_data = relationship("User", back_populates="comments")
+    product_data = relationship("Product", back_populates="comments")
+
     __table_args__ = (
         CheckConstraint('likes >= 0', name='check_likes_positive'),
     )
@@ -70,3 +78,4 @@ class Comment(Base):
 DATABASE_URL = 'sqlite:///../database.db'
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
