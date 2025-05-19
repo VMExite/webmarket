@@ -51,6 +51,59 @@ coverage.xml
 .pytest_cache/
 cover/
 
+# Файлы и папки ОС
+.DS_Store
+Thumbs.db
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+
+# Папки зависимостей
+/node_modules/
+/.pnp
+.pnp.js
+
+# Папка сборки
+/dist/
+/build/
+/out/
+/.next/
+
+# Кэш
+/.cache/
+/.svelte-kit/
+
+# Настройки IDE
+/.idea/
+/.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Переменные окружения
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.env*
+
+# Пакетные менеджеры
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Дополнительно (если есть)
+/coverage/
+/.nyc_output/
+/.jest/
+/cypress/screenshots/
+/cypress/videos/
+
 # Translations
 *.mo
 *.pot
