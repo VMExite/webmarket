@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint, Boolean, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, CheckConstraint, Boolean, create_engine, DATETIME, Double
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import DeclarativeBase, sessionmaker, relationship
 
@@ -22,6 +22,7 @@ class User(Base):
     role = Column(Integer, ForeignKey('roles.id'), default=0)
     balance = Column(Integer, default=0)
 
+
     role_data = relationship("Role", backref="users")
     comments = relationship("Comment", back_populates="user_data")
 
@@ -38,42 +39,28 @@ class Product(Base):
 
     id = Column(Integer, autoincrement=True, primary_key=True)
     name = Column(String, nullable=False)
-    description = Column(String)
-    type = Column(String, ForeignKey('types.id'))
-    price = Column(Integer, default=0)
-    quantity = Column(Integer, default=0)
-    rating = Column(Integer, default=0)
-    rating_quantity = Column(Integer, default=0)
-    views = Column(Integer, default=0)
-    pic = Column(String)
+    description = Column(String, nullable=False)
+    price = Column(Integer)
+    fineness = Column(Integer)
+    carat = Column(Double)
+    type = Column(String, nullable=False)
+    material = Column(String, nullable=False)
+    color = Column(String, nullable=False)
+    size = Column(Integer)
+    date = Column(DATETIME)
+    popularity = Column(Integer)
+    image = Column(String)
 
-    comments = relationship("Comment", back_populates="product_data")
+class Favor(Base):
+    __tablename__ = 'favors'
 
-    __table_args__ = (
-        CheckConstraint('price >= 0', name='check_price_positive'),
-        CheckConstraint('quantity >= 0', name='check_quantity_positive'),
-        CheckConstraint('rating >= 0', name='check_rating_positive'),
-        CheckConstraint('rating_quantity >= 0', name='check_ratingQuantity_positive'),
-        CheckConstraint('views >= 0', name='check_views_positive')
-    )
+    id = Column(Integer, autoincrement=True, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    product_id = Column(Integer, nullable=False)
 
-class Comment(Base):
-    __tablename__ = 'comments'
 
-    id = Column(Integer, primary_key=True)
-    user = Column(Integer, ForeignKey('users.id'))
-    product = Column(Integer, ForeignKey('products.id'))
-    grade = Column(Boolean, nullable=False)
-    text = Column(String)
-    likes = Column(Integer, default=0)
-    date = Column(String, nullable=False)
 
-    user_data = relationship("User", back_populates="comments")
-    product_data = relationship("Product", back_populates="comments")
 
-    __table_args__ = (
-        CheckConstraint('likes >= 0', name='check_likes_positive'),
-    )
 
 DATABASE_URL = 'sqlite:///../database.db'
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})

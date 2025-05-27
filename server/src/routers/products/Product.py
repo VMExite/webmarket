@@ -17,14 +17,14 @@ def create_product(product_in: ProductCreate, db: Session = Depends(get_db())):
     return db_product
 
 
-def get_products(limit: Annotated[int | None, Query()], db: Session = Depends(get_db)):
+def read_products(limit: Annotated[int | None, Query()], db: Session = Depends(get_db)):
     if limit is None:
         return db.query(Product).all()
 
     return db.query(Product).limit(limit).all()
 
 
-def get_product(product_in: int, db: Session = Depends(get_db)):
+def read_product(product_in: int, db: Session = Depends(get_db)):
     if product := db.query(Product).get(product_in):
         return product
 
@@ -32,7 +32,7 @@ def get_product(product_in: int, db: Session = Depends(get_db)):
 
 
 def update_product(product_id: int, product_in: ProductCreate, db: Session = Depends(get_db)):
-    product = get_product(product_id, db)
+    product = read_product(product_id, db)
     for key, value in product_in.dict().items():
         setattr(product, key, value)
 
@@ -42,7 +42,7 @@ def update_product(product_id: int, product_in: ProductCreate, db: Session = Dep
 
 
 def delete_product(product_id: int, db: Session = Depends(get_db)):
-    product = get_product(product_id, db)
+    product = read_product(product_id, db)
     db.delete(product)
     db.commit()
     return {"detail": "product deleted"}

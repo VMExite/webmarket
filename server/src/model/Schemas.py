@@ -4,6 +4,7 @@ from wsgiref.validate import validator
 from datetime import datetime
 from pydantic import EmailStr, Field, field_validator
 from pydantic import BaseModel
+from pydantic_core.core_schema import DatetimeSchema
 
 
 # Roles
@@ -68,51 +69,21 @@ class ProductBase(BaseModel):
     name: str
     description: str
     price: int
-    quantity: int
-    rating: int
-    rating_quantity: int
-    views: int
-    pic: str
+    fineness: int
+    carat: int
+    type: str
+    material: str
+    color: str
+    size: int
+    popularity: int
+    date: DatetimeSchema
+    image: str
 
 class ProductCreate(ProductBase):
     pass
 
 class ProductRead(ProductBase):
     id: int
-
-    class Config:
-        # orm_mode = True
-        from_attributes = True
-
-
-# Comments
-class CommentBase(BaseModel):
-    grade: bool
-    text: str
-    likes: int
-    date: str
-
-    @field_validator('date')
-    @classmethod
-    def date(cls, value):
-        if not re.fullmatch(r'^\d{2}\.\d{2}\.\d{4}$', value):
-            raise ValueError('Data must have a format: DD.MM.YYYY')
-
-        try:
-            datetime.strftime(value, '%d.%m.%Y')
-        except ValueError:
-            raise ValueError('Invalid data value')
-
-        return value
-
-class CommentCreate(CommentBase):
-    user: int
-    product: int
-
-class CommentRead(CommentBase):
-    id: int
-    user: UserRead
-    product: ProductRead
 
     class Config:
         # orm_mode = True
