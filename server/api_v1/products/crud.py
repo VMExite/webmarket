@@ -30,3 +30,4 @@ async def create_product(session: AsyncSession, product: CreateProduct) -> Produ
     await session.commit()
     # await session.refresh(product)
     return product
+
