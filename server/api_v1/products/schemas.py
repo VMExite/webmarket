@@ -1,22 +1,9 @@
-from pydantic import BaseModel, ConfigDict, EmailStr
-from pydantic_core.core_schema import DatetimeSchema
+from datetime import datetime
+from typing import Annotated
 
+from pydantic import BaseModel, ConfigDict, Field
 
-class BaseUser(BaseModel):
-    login: str
-    email: EmailStr
-    password: str
-
-class CreateUser(BaseUser):
-    pass
-
-class UpdateUser(BaseUser):
-    pass
-
-class ReadUser(BaseUser):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: int
+from server.api_v1.users.schemas import ReadUser
 
 
 class BaseType(BaseModel):
@@ -32,22 +19,22 @@ class ReadType(BaseType):
 
 class BaseMaterial(BaseModel):
     name: str
-class CreateMaterial(BaseType):
+class CreateMaterial(BaseMaterial):
     pass
-class UpdateMaterial(BaseType):
+class UpdateMaterial(BaseMaterial):
     pass
-class ReadMaterial(BaseType):
+class ReadMaterial(BaseMaterial):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
 
 class BaseColor(BaseModel):
     name: str
-class CreateColor(BaseType):
+class CreateColor(BaseColor):
     pass
-class UpdateColor(BaseType):
+class UpdateColor(BaseColor):
     pass
-class ReadColor(BaseType):
+class ReadColor(BaseColor):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
@@ -58,30 +45,31 @@ class BaseProduct(BaseModel):
     price: int
     assay: int
     karat: float
-    data: DatetimeSchema
+    data: datetime
     popularity: int
     image: str
 
 class CreateProduct(BaseProduct):
-    type: int
-    material: int
-    color: int
+    type: int = Field(alias="type_id")
+    material: int = Field(alias="material_id")
+    color: int = Field(alias="color_id")
 
 class UpdateProduct(BaseProduct):
-    type: int
-    material: int
-    color: int
+    type: int = Field(alias="type_id")
+    material: int = Field(alias="material_id")
+    color: int = Field(alias="color_id")
 
 class ReadProduct(BaseProduct):
-    model_config = ConfigDict(from_attributes=True)
-
+    model_config = ConfigDict(from_attributes=True, populate_by_name=True)
     id: int
-    type: ReadType
-    material: ReadMaterial
-    color: ReadColor
+
+    type: int = Field(alias="type_id")
+    material: int = Field(alias="material_id")
+    color: int = Field(alias="color_id")
+
 
 class BaseOrder(BaseModel):
-    order_time: DatetimeSchema
+    order_time: datetime
 
 class CreateOrder(BaseOrder):
     user_id: int
@@ -98,3 +86,8 @@ class ReadOrder(BaseOrder):
     product: ReadProduct
 
 
+class FilterData(BaseModel):
+    type: ReadType
+    material: ReadMaterial
+    max_cost: int
+    min_cost: int = Field(ge=8500)

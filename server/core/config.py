@@ -2,7 +2,7 @@ from os import getenv
 from pydantic_settings import BaseSettings
 from pathlib import Path
 
-MAIN_PATH = Path(__file__).parent.parent
+MAIN_PATH = Path(__file__).parent.parent.parent
 
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"

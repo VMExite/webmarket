@@ -1,7 +1,8 @@
 from contextlib import asynccontextmanager
 
-from core.models import Base, db_helper
-from core.config import settings
+from server.core.models import db_helper
+from server.core.models import Base
+from server.core.config import settings
 
 from api_v1 import router as api_v1_router
 
