@@ -1,5 +1,6 @@
 from typing import List, TYPE_CHECKING
 
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, relationship
 from sqlalchemy.orm import mapped_column
@@ -9,7 +10,7 @@ if TYPE_CHECKING:
     from server.core.models.order import Order
 
 
-class User(Base):
+class User(SQLAlchemyUserDatabase,Base):
     __tablename__ = "user"
 
     login: Mapped[str] = mapped_column(String(25))

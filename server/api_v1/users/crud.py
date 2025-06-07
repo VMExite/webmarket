@@ -1,3 +1,5 @@
+from fastapi.params import Depends
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy import select
 from server.core.models.user import User
 from .schemas import CreateUser
@@ -15,7 +17,6 @@ async def get_users(session: AsyncSession) -> list[User]:
 async def get_user(session: AsyncSession, _id: int) -> User | None:
     return await session.get(User, _id)
 
-
 async def create_user(session: AsyncSession, user_in: CreateUser) -> User:
     user = User(**user_in.model_dump())
     session.add(user)
@@ -23,3 +24,5 @@ async def create_user(session: AsyncSession, user_in: CreateUser) -> User:
     # await session.refresh(user)
     return user
 
+async def get_user_db(session: AsyncSession):
+    yield SQLAlchemyUserDatabase(session, User)

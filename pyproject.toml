@@ -12,7 +12,8 @@ dependencies = [
     "sqlalchemy (>=2.0.41,<3.0.0)",
     "uvicorn (>=0.34.2,<0.35.0)",
     "pydantic (>=2.11.4,<3.0.0)",
-    "pydentic[email] (>=0.0.1.dev3,<0.0.2)"
+    "pydentic[email] (>=0.0.1.dev3,<0.0.2)",
+    "fastapi-users[sqlachemy] (>=14.0.1,<15.0.0)"
 ]
 
 
