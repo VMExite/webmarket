@@ -1,16 +1,14 @@
 from pydantic import BaseModel, ConfigDict, EmailStr
+from fastapi_users import schemas
 
-
-class BaseUser(BaseModel):
+class BaseUser(schemas.BaseUser[int]):
     login: str
-    email: EmailStr
-    password: str
 
-class CreateUser(BaseUser):
-    pass
+class CreateUser(schemas.BaseUserCreate):
+    login: str
 
-class UpdateUser(BaseUser):
-    pass
+class UpdateUser(schemas.BaseUserUpdate):
+    login: str
 
 class ReadUser(BaseUser):
     model_config = ConfigDict(from_attributes=True)
