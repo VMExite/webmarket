@@ -6,6 +6,8 @@ from .schemas import CreateUser
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from server.core.models.database_helper import db_helper
+
 
 async def get_users(session: AsyncSession) -> list[User]:
     statement = select(User).order_by(User.id)
@@ -24,5 +26,5 @@ async def create_user(session: AsyncSession, user_in: CreateUser) -> User:
     # await session.refresh(user)
     return user
 
-async def get_user_db(session: AsyncSession):
+async def get_user_db(session: AsyncSession =Depends(dependency=db_helper.session_dependency)):
     yield SQLAlchemyUserDatabase(session, User)
