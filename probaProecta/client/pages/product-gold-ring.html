@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurēlis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/client/css/style.css">
+    <!--подключаем шрифты-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Карточка товара</title>
+</head>
+<body class="product-page product-gold-ring">
+    <header>
+        <div class="search-wrapper">
+            <div class="search">
+                <input type="text" placeholder="Найти">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+    
+        <div class="center">
+            <h2 class="logo">Aurēlis</h2>
+        </div>
+    
+        <ul>
+            <li class="login">
+                <a href="/client/pages/registration.html" class="s1">
+                    Войти
+                    <span class="s1__in"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="icon-link" aria-label="Избранное">
+                    <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path
+                            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/client/pages/catalog.html" class="icon-link" aria-label="Корзина">
+                    <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="flex-grow-1" style="border-top: 1px solid #800020"></div>
+
+
+    <div class="product-container">
+        <div class="product-media">
+            <img id = "product-image" src="/client/img/bestsel1.webp" alt="Золотое кольцо Choreus" class="product-image">
+    
+            <div class="product-icons">
+                <i class="bi bi-heart"></i>
+                <i class="bi bi-share"></i>
+            </div>
+    
+            <!-- Характеристики -->
+            <div class="product-specs">
+                <h2>ХАРАКТЕРИСТИКИ</h2>
+                <div class="specs-row">
+                    <span class="specs-name">Артикул</span>
+                    <span class="specs-value">00000</span>
+                </div>
+                <div class="specs-row">
+                    <span class="specs-name">Вес украшения</span>
+                    <span id = "product-weight" class="specs-value">15 г</span>
+                </div>
+                <div class="specs-row">
+                    <span class="specs-name">Металл</span>
+                    <span class="specs-value">Золото</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="product-details">
+            <h2 class="product-subtitle" id = "product-title">ЗОЛОТОЕ КОЛЬЦО</h2>
+    
+            <div class="product-options">
+                <div class="option-group">
+                    <label for = "sizeSelect" class="option-title">РАЗМЕР</label>
+                    <div id = "sizeSelect" class="option-values">
+                        <div class="option-value">15</div>
+                        <div class="option-value">16</div>
+                        <div class="option-value">17</div>
+                    </div>
+                </div>
+    
+                <label for = "probeSelect" class="option-group">
+                    <div id = "probeSelect" class="option-title">ПРОБА</div>
+                    <div class="option-values">
+                        <div class="option-value">512</div>
+                    </div>
+                </label>
+                <br>
+    
+                <label for = "caratSelect" class="option-group">
+                    <div id = "caratSelect" class="option-title">КАРАТ</div>
+                    <div class="option-values">
+                        <div class="option-value">12</div>
+                        <div class="option-value">0,71</div>
+                    </div>
+                </label>
+            </div>
+    
+            <div class="divider"></div>
+
+            <div class="gold-sum">
+                <div id = "product-price" class="sum-value">28 760 руб</div>
+            </div>
+
+            <div class="d-flex gap-3">
+                <a href="#" class="add-link">
+                    <button id = "addToCart" class="add-to-cart">ДОБАВИТЬ В КОРЗИНУ</button>
+                </a>
+                <a href="/client/pages/delivery.html" class="buy-now-link">
+                    <button id = "buyNow" class="buy-now">КУПИТЬ СЕЙЧАС</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Футер -->
+    <footer class="site-footer custom-color text-white mt-5 p-4">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="aboutUs">О нас</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="garant">Гарантии</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="ask_question">Задать вопрос</span>
+                    </a>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="certification">Сертификация</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="delivery_and_fitting">Доставка и примерка</span>
+                    </a>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <a href="/client/index.html" class="text-white text-decoration-none">
+                        <span class="main_page">Главная страница</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="/client/index.html#бестселлеры" class="text-white text-decoration-none">
+                        <span class="bestsellers">Бестселлеры</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="/client/index.html#коллекция" class="text-white text-decoration-none">
+                        <span class="collection">Коллекция</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <p class="text-center mt-3 small">
+            <i class="bi bi-c-circle"> Aurēlis. Все права защищены</i>
+        </p>
+    </footer>
+    
+</body>
+</html>
