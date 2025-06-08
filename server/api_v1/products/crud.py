@@ -8,7 +8,7 @@
 
 from sqlalchemy import select
 from server.core.models import Product
-from .schemas import CreateProduct
+from server.api_v1.products.schemas import CreateProduct
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from server.core.models.product import Material, Color, Type

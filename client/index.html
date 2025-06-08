@@ -1,10 +1,769 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurēlis – Магазин ювелирных украшений</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/client/css/style.css">
+    <!--подключаем шрифты-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!--<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">--> <!--иконка сайта-->
 </head>
+
 <body>
 
+    <header>
+        <div class="search-wrapper">
+            <div class="search">
+                <input type="text" id = "searchInput" placeholder="Найти">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="center">
+            <h2 class="logo">Aurēlis</h2>
+        </div>
+
+        <ul>
+            <li class="login">
+                <a href="/client/pages/registration.html" class="s1" id="authButton">
+                    Войти
+                    <span class="s1__in"></span>
+                </a>
+                <div id="userProfile" style="display: none;">
+                    <a href="/client/pages/personal_account.html" class="s1">
+                        ЛК
+                        <span class="s1__in"></span>
+                    </a>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="icon-link" aria-label="Избранное">
+                    <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path
+                            d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                    </svg>
+                </a>
+            </li>
+            <li>
+                <a href="/client/pages/catalog.html" class="icon-link" aria-label="Корзина">
+                    <svg class="nav-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <path d="M3 6h18" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        <section class="border" id="главная">
+            <div class="hero-content text-center">
+                <h1 class="hero-title">TRY SOMETHING NEW</h1>
+                <p class="hero-subtitle">Украшения в которых живет<br>история и сияет будущее</p>
+                <div class="border__in">
+                    <a href="#коллекция" class="border__title">Смотреть коллекцию</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="icon-nav container text-center my-4">
+            <div class="row justify-content-center">
+                <div class="col icon-item suspension" data-type = "подвески">
+                    <img src="/client/img/category_suspensions.webp" alt="подвески">
+                    <br>подвески
+                </div>
+                <div class="col icon-item serge" data-type = "серьги">
+                    <img src="/client/img/category_series.webp" alt="серьги">
+                    <br>серьги
+                </div>
+                <div class="col icon-item">
+                    <img src="/client/img/category_them.webp" alt="для него и для нее">
+                    <br>для НЕГО и для НЕЁ
+                </div>
+                <div class="col icon-item ring" data-type = "кольца">
+                    <img src="/client/img/category_ring.webp" alt="кольцо">
+                    <br>кольца
+                </div>
+                <div class="col icon-item braslet" data-type = "браслет">
+                    <img src="/client/img/category_braslet.webp" alt="браслеты">
+                    <br>браслеты
+                </div>
+            </div>
+        </section>
+
+        <!-- Три карточки категорий -->
+        <section class="jewelry-collections">
+            <div class="container">
+                <!-- Gold Collection -->
+                <div class="collection-card gold-collection">
+                    <div class="collection-image"></div>
+                    <div class="collection-content">
+                        <span> Gold Jewellery</span>
+                        <a href="#" class="cta-button" data-material="золото">перейти</a>
+                    </div>
+                </div>
+
+                <!-- Diamond Collection -->
+                <div class="collection-card diamond-collection">
+                    <div class="collection-image"></div>
+                    <div class="collection-content">
+                        <span>Diamond Jewellery</span>
+                        <a href="#" class="cta-button" data-material="бриллиант">перейти</a>
+                    </div>
+                </div>
+
+                <!-- Platinum Collection -->
+                <div class="collection-card platinum-collection">
+                    <div class="collection-image"></div>
+                    <div class="collection-content">
+                        <span>Platinum Jewellery</span>
+                        <a href="#" class="cta-button" data-material="платина">перейти</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция "Почему выбирают" -->
+        <section class="why-choose-section">
+            <div class="container">
+                <div class="content-wrapper">
+                    <div class="why-choose-text">
+                        <h2>Почему нас выбирают более 65% девушек</h2>
+                        <p>Нас выбирают не просто за украшения. Нас выбирают за чувство, которое они вызывают. Более 65%
+                            девушек
+                            выбирают наш бренд за стиль, смысл и вдохновение, воплощённые в каждой детали. Мы создаём не
+                            просто
+                            серьги и кольца — мы создаём моменты, которые остаются с вами.</p>
+                    </div>
+                    <div class="why-choose-image">
+                        <img src="/client/img/whych.webp" alt="Девушка с украшениями">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Бестселлеры -->
+        <section class="container my-5" id="бестселлеры">
+            <h3 class="text-center mb-4">Бестселлеры</h3>
+            <div class="row text-center">
+                <!--товар1-->
+                <div class="col"
+                    data-type = "кольцо"
+                    data-material = "золото"
+                    data-price = "28760"
+                    >
+                    <a href="/client/pages/product-gold-ring.html" class="product-link">
+                        <div class="placeholder-img">
+                            <img src="/client/img/bestsel1.webp" alt="Кольцо бестселлер">
+                            <p>Золотое кольцо<br><span class="price">28 760 ₽</span></p>
+                        </div>
+                    </a>
+
+                </div>
+                <!--товар2-->
+                <div class="col"
+                    data-type = "серьги"
+                    data-material = "золото"
+                    data-price = "34600"
+                    >
+                    <a href="#">
+                        <div class="placeholder-img">
+                            <img src="/client/img/bestsel2.webp" alt="Серьги бестселлер">
+                            <p>Золотые серьги<br><span class="price">34 600 ₽</span></p>
+                        </div>
+                    </a>
+                </div>
+                <!--товар3-->
+                <div class="col"
+                    data-type = "кольцо"
+                    data-material = "золото"
+                    data-price = "37700"
+                    >
+                    <a href="#">
+                        <div class="placeholder-img">
+                            <img src="/client/img/bestsel3.webp" alt="Кольцо с бриллиантом бестселлер">
+                            <p>Кольцо с бриллиантом<br><span class="price">37 700 ₽</span></p>
+                        </div>
+                    </a>
+                </div>
+                <!--товар4-->
+                <div class="col"
+                    data-type = "подвеска"
+                    data-material = "золото"
+                    data-price = "19000"
+                    >
+                    <a href="#">
+                        <div class="placeholder-img">
+                            <img src="/client/img/bestsel4.webp" alt="Чокер бестселлер">
+                            <p>Чокер<br><span class="price">19 000 ₽</span></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Вся коллекция -->
+        <section class="container my-5" id="коллекция">
+            <!-- заголовок и кнопки -->
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div class="flex-grow-1 me-3" style="border-top: 2px solid #800020;"></div>
+                <h3 class="mb-0">Вся коллекция</h3>
+                <div class="flex-grow-1 ms-3" style="border-top: 2px solid #800020;"></div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-start mb-4">
+            
+                <!-- ФИЛЬТР -->
+                <div class="filter-wrapper position-relative">
+                    <button class="btn text-dark d-flex align-items-center gap-2 p-0" style="font-size: 1.3rem;"
+                        data-bs-toggle="collapse" data-bs-target="#filterOptions" aria-expanded="false"
+                        aria-controls="filterOptions">
+                        <i class="bi bi-funnel" style="color: #800020; font-size: 1.4rem;"></i>
+                        <span class="fw-medium">Фильтр</span>
+                    </button>
+            
+                    <!-- БЛОК ФИЛЬТРА -->
+                    <div class="collapse position-absolute start-0 mt-2" id="filterOptions" style="z-index: 10; width: 200px;">
+                        <div class="card card-body p-2 shadow-sm">
+                            <!--цена-->
+                            <strong class="mb-1 d-block">Цена</strong>
+                            <div class="form-check">
+                                <input class="form-check-input price-filter" type="checkbox" value="0-20000" id="price1">
+                                <label class="form-check-label" for="price1">до 20 000</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input price-filter" type="checkbox" value="20000-60000" id="price2">
+                                <label class="form-check-label" for="price2">20 000 – 60 000</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input price-filter" type="checkbox" value="60000-1000000" id="price3">
+                                <label class="form-check-label" for="price3">60 000+</label>
+                            </div>
+
+                            <!--материал-->
+                            <strong class="mb-1 d-block">Материал</strong>
+                            <div class="form-check">
+                                <input class="form-check-input material-filter" type="checkbox" value="золото" id="gold">
+                                <label class="form-check-label" for="gold">Золото</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input material-filter" type="checkbox" value="серебро" id="silver">
+                                <label class="form-check-label" for="silver">Серебро</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input material-filter" type="checkbox" value="платина" id="platinum">
+                                <label class="form-check-label" for="platinum">Платина</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input material-filter" type="checkbox" value="бриллиант" id="diamond">
+                                <label class="form-check-label" for="diamond">Бриллиант</label>
+                            </div>
+
+                            <!--тип украшения-->
+                            <strong class="mb-1 d-block">Тип</strong>
+                            <div class="form-check">
+                                <input class="form-check-input type-filter" type="checkbox" value="кольцо" id="ring">
+                                <label class="form-check-label">Кольцо</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input type-filter" type="checkbox" value="подвески" id="suspension">
+                                <label class="form-check-label">Подвески</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input type-filter" type="checkbox" value="браслет" id="braslet">
+                                <label class="form-check-label">Браслеты</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input type-filter" type="checkbox" value="серьги" id="earring">
+                                <label class="form-check-label">Серьги</label>
+                            </div>
+                            <button id="applyFilters" class="btn btn-primary mt-3" type="button">Применить</button>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- СОРТИРОВКА -->
+                <div class="sort-wrapper position-relative">
+                    <button class="btn text-dark d-flex align-items-center gap-2 p-0" style="font-size: 1.3rem;"
+                        data-bs-toggle="collapse" data-bs-target="#sortOptions" aria-expanded="false" aria-controls="sortOptions">
+                        <span class="fw-medium">Сортировать</span>
+                        <i class="bi bi-chevron-down" style="color: #800020; font-size: 1.4rem;"></i>
+                    </button>
+            
+                    <!-- БЛОК СОРТИРОВКИ -->
+                    <div class="collapse position-absolute end-0 mt-2" id="sortOptions" style="z-index: 10; width: 200px;">
+                        <div class="card card-body p-2 shadow-sm">
+                            <button class="btn btn-outline-secondary btn-sm text-start w-100 mb-2"
+                                data-sort="popularity">По популярности</button>
+                            <button class="btn btn-outline-secondary btn-sm text-start w-100 mb-2" data-sort="price">Цене</button>
+                            <button class="btn btn-outline-secondary btn-sm text-start w-100" data-sort="new">Новинкам</button>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+
+            <div class="container">
+                <div class="row text-center" id = "gallery"> 
+                    <!-- товары -->
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "кольцо" 
+                        data-material = "золото"
+                        data-price = "23760"
+                        data-id = "8"> <!-- data-id чем больше тем новее; Подправить-->
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring_1.webp" alt="Кольцо с бриллиантом">
+                                <p>Кольцо с бриллиантом<br><span class="price">23 760 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type = "браслет" 
+                        data-material = "золото"
+                        data-price = "22780"
+                        data-id = "7">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension_1.webp" alt="Браслет с жемчугом">
+                                <p>Браслет с жемчугом<br><span class="price">22 780 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "браслет" 
+                        data-material = "золото"
+                        data-price = "20000"
+                        data-id = "6">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet_1.webp" alt="Браслет коллекция">
+                            </div>
+                            <p>Золотой браслет<br><span class="price">20 000 ₽</span></p>
+                        </a>
+                    </div>
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "подвески" 
+                        data-material = "серебро"
+                        data-price = "15199"
+                        data-id = "5">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_chain_2.webp" alt="Цепь коллекция">
+                                <p>Серебрянная цепь<br><span class="price">15 199 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "подвески" 
+                        data-material = "золото"
+                        data-price = "36500"
+                        data-id = "4">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_cool_2.webp" alt="Кулон с камнем коллекция">
+                                <p>Кулон с камнем<br><span class="price">36 500 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "серьги" 
+                        data-material = "золото"
+                        data-price = "52600"
+                        data-id = "3">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_serge_2.webp" alt="Серьги с сапфирами коллекция">
+                                <p>Серьги с сапфирами<br><span class="price">52 600 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "подвески" 
+                        data-material = "золото"
+                        data-price = "61000"
+                        data-id = "2">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension_2.webp" alt="Подвеска с рубином коллекция">
+                                <p>Подвеска с рубином <br><span class="price">61 000 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type = "кольцо" 
+                        data-material = "серебро"
+                        data-price = "31400"
+                        data-id = "1">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring_2.webp" alt="Серебрянное кольцо с камнем">
+                                <p>Серебрянное кольцо<br><span class="price">31 400 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <!-- 1 после показать еще -->
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="серебро" 
+                        data-price="24600" 
+                        data-id="9">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet7.webp" alt="Серебрянный браслет">
+                                <p>Серебрянный браслет<br><span class="price">24 600 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="золото" 
+                        data-price="31460" 
+                        data-id="10">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet9.webp" alt="Золотой браслет">
+                                <p>Золотой браслет<br><span class="price">31 460 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="подвески" 
+                        data-material="серебро"
+                        data-price="24719" 
+                        data-id="11">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension10.webp" alt="Серебрянная подвеска">
+                                <p>Серебрянная подвеска<br><span class="price">24 719 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4"
+                        data-type="кольцо" 
+                        data-material="серебро" 
+                        data-price="201449" 
+                        data-id="12">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring6.webp" alt="Серебрянная кольцо с бриллиантом">
+                                <p>Кольцо с бриллиантом<br><span class="price">201 449 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="серьги" 
+                            data-material="золото" 
+                            data-price="27390" 
+                            data-id="13">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_series6.webp" alt="Золотые серьги">
+                                <p>Золотые серьги<br><span class="price">27 390 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="подвески" 
+                        data-material="золото" 
+                        data-price="27390" 
+                        data-id="14">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension5.webp" alt="Золотая подвеска">
+                                <p>Золотая подвеска love<br><span class="price">32 650 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="серьги" 
+                        data-material="золото" 
+                        data-price="50560" 
+                        data-id="15">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_series5.webp" alt="Золотые серьги с бриллиантами">
+                                <p>Золотые серьги<br><span class="price">50 560 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="золото" 
+                        data-price="31994" 
+                        data-id="16">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet8.webp" alt="Золотой браслет">
+                                <p>Золотой браслет<br><span class="price">31 994 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <!-- 2 после показать еще -->
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="серьги" 
+                        data-material="серебро" 
+                        data-price="46760" 
+                        data-id="17">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_series3.webp" alt="Серьги с жемчугом">
+                                <p>Серьги с жемчугом<br><span class="price">46 760 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="кольцо" 
+                        data-material="бриллиант" 
+                        data-price="299695" 
+                        data-id="18">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring4.webp" alt="Кольцо с аквамарином и бриллиантами">
+                                <p>Кольцо с аквамарином<br><span class="price">299 695 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="бриллиант" 
+                        data-price="143960" 
+                        data-id="19">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet5.webp" alt="Браслет с бриллиантами">
+                                <p>Браслет с бриллиантами<br><span class="price">143 960 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="подвеска" 
+                        data-material="бриллиант" 
+                        data-price="1346950" 
+                        data-id="20">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension8.webp" alt="Колье с бриллиантами и куницитом">
+                                <p>Колье с бриллиантами и куницитом<br><span class="price">134 6950 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="серьги" 
+                        data-material="бриллиант" 
+                        data-price="261195" 
+                        data-id="21">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_series7.webp" alt="Серьги с бриллиантами и топазами">
+                                <p>Серьги с бриллиантами и топазами<br><span class="price">261 195 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="платина" 
+                        data-price="45277" 
+                        data-id="22">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet3.webp" alt="Браслет с топазами">
+                                <p>Браслет с топазами<br><span class="price">45 277 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="золото" 
+                        data-price="28477"
+                        data-id="23">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet4.webp" alt="Золотой браслет">
+                                <p>Золотой браслет<br><span class="price">28 477 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="подвеска" 
+                        data-material="бриллиант" 
+                        data-price="741950" 
+                        data-id="24">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension9.webp" alt="Колье с бриллиантами,изумрудом и цветными сапфирами">
+                                <p>Колье с бриллиантами и изумрудом<br><span class="price">741 950 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <!-- 3 после показать еще -->
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="подвеска" 
+                        data-material="бриллиант" 
+                        data-price="961950" 
+                        data-id="25">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_suspension6.webp"
+                                    alt="Колье с бриллиантами и аквамарином">
+                                <p>Колье с бриллиантами и аквамарином<br><span class="price">961 950 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="браслет" 
+                        data-material="серебро" 
+                        data-price="16199" 
+                        data-id="26">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_braslet6.webp" alt="Браслет с фианитами">
+                                <p>Браслет с фианитами<br><span class="price">16 199 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="кольцо" 
+                        data-material="серебро" 
+                        data-price="38408" 
+                        data-id="27">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring7.webp" alt="Серебрянное кольцо">
+                                <p>Серебрянное кольцо<br><span class="price">38 408 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+    
+                    <div class="cadrcol col-md-3 mb-4" 
+                        data-type="кольцо" 
+                        data-material="бриллиант"
+                        data-price="170445" 
+                        data-id="28">
+                        <a href="#">
+                            <div class="placeholder-img">
+                                <img src="/client/img/collection_ring5.webp" alt="Кольцо с бриллиантами,сапфирами,гранатами">
+                                <p>Кольцо с бриллиантами и сапфирами<br><span class="price">170 445 ₽</span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="custom-btn" id = "loadMoreBtn" type = "button">Показать ещё</button>
+            </div>
+        </section>
+    </main>
+    <!-- Футер -->
+    <footer class="site-footer custom-color text-white mt-5 p-4">
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="aboutUs">О нас</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="garant">Гарантии</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                        <span class="ask_question">Задать вопрос</span>
+                    </a>
+                </p>
+            </div>
+            <div>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                    <span class="certification">Сертификация</span>
+                </a>
+            </p>
+                <p>
+                    <a href="#" class="text-white text-decoration-none">
+                    <span class="delivery_and_fitting">Доставка и примерка</span>
+                </a>
+            </p>
+            </div>
+            <div>
+                <p>
+                    <a href="#главная" class="text-white text-decoration-none">
+                        <span class="main_page">Главная страница</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#бестселлеры" class="text-white text-decoration-none">
+                        <span class="bestsellers">Бестселлеры</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#коллекция" class="text-white text-decoration-none">
+                        <span class="collection">Коллекция</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <p class="text-center mt-3 small">
+            <i class="bi bi-c-circle"> Aurēlis. Все права защищены</i>
+        </p>
+        <script type="module" src="/client/js/auth-check.js"></script>
+        <script type="module" src="/client/js/script.js"></script>
+        <script type="module" src="/client/js/filters.js"></script>
+        <script type="module" src="/client/js/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </footer>
 </body>
+
 </html>
