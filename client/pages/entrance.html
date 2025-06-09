@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/client/css/style.css">
+    <link rel="stylesheet" href="/webmarket/client/css/style.css">
     <!--подключаем шрифты-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,15 +22,6 @@
     <div class="overlay">
         <div class="popup">
             <h2>ВОЙТИ В АККАУНТ</h2>
-            <!--<form action="/client/pages/personal account.html" method="GET">
-                <input type="email" placeholder="Email" required/>
-                <div class="password-wrapper">
-                    <input type="password" placeholder="Password" required/>
-                    <span class="eye-icon"><i class="bi bi-eye-slash"></i></span>
-                </div>
-                <button type="submit">ВОЙТИ</button>
-            </form>-->
-
             <form id="loginForm">
                 <div class="form-group">
                     <input type="email" id="email" placeholder="Email" required>
@@ -42,14 +33,11 @@
                 <div id="formError" class="error-message"></div>
                 <button type="submit">ВОЙТИ</button>
             </form>
-
-
-
         </div>
     </div>
 
-    <script src="/client/js/logoutButton.js"></script>
-    <script src="/client/js/authorization.js"></script>
+    <script src="/webmarket/client/js/authorization.js"></script>
+    <script src="/webmarket/client/js/auth-check.js"></script>
 </body>
 
 </html>

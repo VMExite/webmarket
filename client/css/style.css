@@ -47,16 +47,9 @@
 }
 
 
-/* Satoshi */
-/*@font-face {
-    font-family: 'Satoshi';
-    src: url('../fonts/satoshi-Regular.otf') format('truetype');
-    font-weight: 400;
-    font-style: normal;
-}*/
-
 html {
     scroll-behavior: smooth;
+
 }
 
 body {
@@ -65,6 +58,18 @@ body {
     color: #333;
     background-color: #fff;
 
+    /* прижимаем футер */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 header {
@@ -210,6 +215,25 @@ li a {
     text-decoration: none;
 }
 
+
+.wrapper {
+    position: relative;
+
+}
+
+.inner {
+    position: absolute;
+    width: 100%;
+
+}
+
+
+
+
+
+
+
+
 .border {
     height: 400px;
     width: 100%;
@@ -313,6 +337,13 @@ li a {
     font-weight: bold;
 }
 
+.sort-icon.rotated {
+    transform: rotate(-180deg);
+}
+.sort-icon {
+    transition: transform 0.3s ease;
+}
+
 
 /* Блоки с фоновыми изображениями */
 .gold-collection .collection-image {
@@ -391,12 +422,6 @@ li a {
     background-repeat: no-repeat;
     display: block;
 }
-
-
-
-
-
-
 
 
 .icon-item {
@@ -543,7 +568,8 @@ ul li a {
 /* Футтер */
 .site-footer {
     background-color: var(--thrid-color);
-    
+
+    margin-top: auto;
 }
 
 a:hover .aboutUs,
@@ -853,12 +879,24 @@ a:hover .collection {
 }
 
 /* СПИСОК ЖЕЛАНИЙ */
+.page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.divider-line {
+    height: 1px;
+    background-color: #800020;
+    width: 100%;
+}
+
 
 .wishlist-empty {
     text-align: center;
-    padding: 40px 20px;
-    max-width: 600px;
     margin: 0 auto;
+    padding: 20px;
+    margin-top: 20px;
 }
 
 .wishlist-empty__title {
@@ -874,15 +912,53 @@ a:hover .collection {
     line-height: 1.5;
 }
 
-.wishlist-empty__link {
-    text-decoration: underline;
-    transition: color 0.2s ease;
+.wishlist-link {
+    color: #800020;
+    text-decoration: none;
 }
 
 .wishlist-link:hover {
     color: #800020;
     text-decoration: none;
 }
+
+/* Стили для name-block */
+.name-block {
+    background-color: #F5F5F5;
+    margin-bottom: 20px;
+    /* Уменьшено с 30px */
+    width: 100%;
+    height: 80px;
+    /* Уменьшено с 90px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.name-block h2 {
+    font-weight: 500;
+    font-size: 2rem;
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ВСПЛЫВАЮЩАЯ СТРАНИЦА РЕГИСТРАЦИИ */
 .overlay {

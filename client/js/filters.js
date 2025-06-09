@@ -1,3 +1,5 @@
+//ИЗМЕНИТЬ: сделать через запрос на сервер
+
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('#коллекция .col-md-3, #коллекция .cadrcol'));
     const loadMoreBtn = document.getElementById('loadMoreBtn');
@@ -69,3 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     filteredCards = [...cards];
     updateVisibility();
 });
+
+
+
+

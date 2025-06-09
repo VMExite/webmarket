@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const form = document.querySelector('#registrationForm');
-    const errorBox = document.querySelector('#formError');
-
-    // тображения/скрытия пароля
-    const passwordInput = document.querySelector('#password');
+    const form = document.getElementById('registrationForm');
+    const errorBox = document.getElementById('formError');
+    const submitBtn = document.getElementById('submitBtn');
+    const passwordInput = document.getElementById('password');
     const eyeIcon = document.querySelector('.eye-icon i');
 
+    // откр/закр глаз
     if (passwordInput && eyeIcon) {
         document.querySelector('.eye-icon').addEventListener('click', () => {
             const isPassword = passwordInput.type === 'password';
@@ -15,56 +15,76 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
+    // валидация email
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            submitBtn.disabled = true;
+            errorBox.textContent = '';
 
-            const firstName = form.querySelector('#firstName').value.trim();
+            const login = form.querySelector('#login').value.trim();
             const email = form.querySelector('#email').value.trim();
             const password = form.querySelector('#password').value.trim();
 
-            if (!firstName || !email || !password) {
-                errorBox.textContent = "Нужно заполнить все поля";
+            if (!login || !email || !password) {
+                errorBox.textContent = "Все поля обязательны для заполнения";
+                submitBtn.disabled = false;
                 return;
             }
-            errorBox.textContent = '';
+
+            if (!isValidEmail(email)) {
+                errorBox.textContent = "Введите корректный email";
+                submitBtn.disabled = false;
+                return;
+            }
+
+            if (password.length < 6) {
+                errorBox.textContent = "Пароль должен содержать минимум 6 символов";
+                submitBtn.disabled = false;
+                return;
+            }
 
             try {
-                const response = await fetch(`http://localhost:8000/api/v1/register/register`, { 
+                const response = await fetch('http://localhost:8000/api/v1/register/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        login: firstName,
+                        login: login,
                         email: email,
                         password: password,
+                        is_active: true,
+                        is_superuser: false,
+                        is_verified: false
                     })
                 });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    errorBox.textContent = errorData.message || `Ошибка: ${response.status}`;
-                    return;
-                }
 
                 const data = await response.json();
-                console.log('Регистрация прошла успешно', data);
 
-                // сохраняем данные пользователя
+                if (!response.ok) {
+                    throw new Error(data.detail || 'Ошибка регистрации');
+                }
+
+                // успешная регистрация
                 localStorage.setItem('user', JSON.stringify({
                     isAuthenticated: true,
-                    token: data.token || null, // добавляем токен ; проверить наличие на сервере
-                    name: firstName,
-                    email: email
+                    userId: data.id,
+                    email: data.email,
+                    login: data.login
                 }));
 
-                // Перенаправляем на главную
-                window.location.href = '/client/index.html';
+                window.location.href = '/webmarket/client/index.html';
 
-            } catch (err) {
-                errorBox.textContent = 'Произошла ошибка при регистрации. Попробуйте снова';
-                console.error('Ошибка регистрации:', err);
+            } catch (error) {
+                console.error('Ошибка регистрации:', error);
+                errorBox.textContent = error.message || 'Произошла ошибка при регистрации';
+            } finally {
+                submitBtn.disabled = false;
             }
         });
     }

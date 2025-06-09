@@ -1,11 +1,10 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#loginForm');
     const errorBox = document.querySelector('#formError');
-
-    // отображения/скрытия пароля
     const passwordInput = document.querySelector('#password');
     const eyeIcon = document.querySelector('.eye-icon i');
 
+    // Переключение видимости пароля
     if (passwordInput && eyeIcon) {
         document.querySelector('.eye-icon').addEventListener('click', () => {
             const isPassword = passwordInput.type === 'password';
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (form) {
         form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // отменяем перезагрузку страницы
+            e.preventDefault();
 
             const email = form.querySelector('#email').value.trim();
             const password = form.querySelector('#password').value.trim();
@@ -32,50 +31,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const response = await fetch(`http://localhost:8000/api/v1/auth/login`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: JSON.stringify({
-                        email: email,
-                        password: password,
+                    body: new URLSearchParams({
+                        grant_type: 'password',
+                        username: email,
+                        password: password
                     })
                 });
-                
+
+                const data = await response.json();
+
                 if (!response.ok) {
-                    const errorData = await response.json();
-                    errorBox.textContent = errorData.message || `Ошибка: ${response.status}`;
+                    if (data.detail === "LOGIN_BAD_CREDENTIALS") {
+                        errorBox.innerHTML = 'Пользователь не найден или неверный пароль. <a href="/webmarket/client/pages/registration.html">Зарегистрироваться</a>';
+                    } else {
+                        errorBox.textContent = data.detail || `Ошибка авторизации (${response.status})`;
+                    }
                     return;
                 }
 
-                const data = await response.json();
-                console.log('Авторизация прошла успешно', data);
+                console.log('Авторизация успешна:', data);
 
-                // сохраняем данные пользователя
-                localStorage.setItem('user', JSON.stringify({
-                    isAuthenticated: true,
-                    token: data.token, // сохраняем токен; проверить наличие
-                    name: data.user?.name,
-                    email: email
-                }));
+                // Сохраняем access_token в localStorage
+                localStorage.setItem('authToken', data.access_token);
 
-                window.location.href = '/client/index.html';
+                // Перенаправляем на главную страницу
+                window.location.href = '/webmarket/client/index.html';
 
             } catch (err) {
-                errorBox.textContent = 'Произошла ошибка при авторизации. Попробуйте снова';
-                console.error(err);
+                console.error('Ошибка авторизации:', err);
+                errorBox.textContent = 'Ошибка сети. Попробуйте снова';
             }
         });
     }
-
-    // После успешного входа
-    const data = await response.json();
-
-    localStorage.setItem('user', JSON.stringify({
-        isAuthenticated: true,
-        token: data.token, // Сохраняем токен
-        name: data.user?.name,
-        email: email
-    }));
-
-    window.location.href = '/client/index.html';
-    
 });
