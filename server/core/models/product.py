@@ -16,7 +16,6 @@ class Product(Base):
     price: Mapped[int]
     type_id: Mapped[int] = mapped_column(ForeignKey("type.id"))
     material_id: Mapped[int] = mapped_column(ForeignKey("material.id"))
-    color_id: Mapped[int] = mapped_column(ForeignKey("color.id"))
     assay: Mapped[int]
     karat: Mapped[float]
     data: Mapped[datetime] = mapped_column(DATETIME)
@@ -25,7 +24,6 @@ class Product(Base):
 
     type: Mapped["Type"] = relationship()
     material: Mapped["Material"] = relationship()
-    color: Mapped["Color"] = relationship()
 
     orders: Mapped["Order"] = relationship(back_populates="product", cascade="all, delete-orphan")
 
@@ -35,8 +33,4 @@ class Type(Base):
 
 class Material(Base):
     __tablename__ = "material"
-    name: Mapped[str]
-
-class Color(Base):
-    __tablename__ = "color"
     name: Mapped[str]

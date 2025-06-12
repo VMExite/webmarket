@@ -8,10 +8,10 @@
 
 from sqlalchemy import select
 from server.core.models import Product
-from .schemas import CreateProduct
+from server.api_v1.products.schemas import CreateProduct
 from sqlalchemy.engine import Result
 from sqlalchemy.ext.asyncio import AsyncSession
-from server.core.models.product import Material, Color, Type
+from server.core.models.product import Material, Type
 
 async def get_products(session: AsyncSession) -> list[Product]:
     statement = select(Product).order_by(Product.id)

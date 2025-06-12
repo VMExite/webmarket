@@ -28,17 +28,6 @@ class ReadMaterial(BaseMaterial):
 
     id: int
 
-class BaseColor(BaseModel):
-    name: str
-class CreateColor(BaseColor):
-    pass
-class UpdateColor(BaseColor):
-    pass
-class ReadColor(BaseColor):
-    model_config = ConfigDict(from_attributes=True)
-
-    id: int
-
 class BaseProduct(BaseModel):
     name: str
     description: str
@@ -52,12 +41,10 @@ class BaseProduct(BaseModel):
 class CreateProduct(BaseProduct):
     type: int = Field(alias="type_id")
     material: int = Field(alias="material_id")
-    color: int = Field(alias="color_id")
 
 class UpdateProduct(BaseProduct):
     type: int = Field(alias="type_id")
     material: int = Field(alias="material_id")
-    color: int = Field(alias="color_id")
 
 class ReadProduct(BaseProduct):
     model_config = ConfigDict(from_attributes=True, populate_by_name=True)
@@ -65,7 +52,6 @@ class ReadProduct(BaseProduct):
 
     type: int = Field(alias="type_id")
     material: int = Field(alias="material_id")
-    color: int = Field(alias="color_id")
 
 
 class BaseOrder(BaseModel):

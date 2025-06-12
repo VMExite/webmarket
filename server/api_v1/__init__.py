@@ -13,4 +13,3 @@ router = APIRouter()
 router.include_router(product_router, prefix="/products")
 router.include_router(user_router, prefix="/users")
 router.include_router(auth_router, prefix="")
-

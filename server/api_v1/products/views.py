@@ -2,7 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import APIRouter, HTTPException, Depends
 
 from . import crud, filter
-from .schemas import ReadProduct, CreateProduct, FilterData
+from server.api_v1.products.schemas import ReadProduct, CreateProduct, FilterData
 from server.core.models.database_helper import db_helper
 
 router = APIRouter(tags=["Products"])

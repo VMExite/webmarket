@@ -4,7 +4,7 @@ from server.core.models import db_helper
 from server.core.models import Base
 from server.core.config import settings
 
-from api_v1 import router as api_v1_router
+from server.api_v1 import router as api_v1_router  # не было server.
 
 import uvicorn
 from fastapi import FastAPI
@@ -28,4 +28,5 @@ app.add_middleware(
 )
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", reload=True)
+    # uvicorn.run("main:app", reload=True)
+    uvicorn.run("server.main:app", host="127.0.0.1", port=8000, reload=True)
