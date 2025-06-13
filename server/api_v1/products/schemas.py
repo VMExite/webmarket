@@ -73,7 +73,7 @@ class ReadOrder(BaseOrder):
 
 
 class FilterData(BaseModel):
-    type: ReadType
-    material: ReadMaterial
+    type: ReadType | None = None
+    material: ReadMaterial | None = None
     max_cost: int
     min_cost: int = Field(ge=8500)
